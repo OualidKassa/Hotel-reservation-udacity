@@ -23,12 +23,13 @@ public class ReservationService {
         return reservationService;
     }
 
-    public void addRoom(IRoom room){
-        roomSet.add(room);
+    //default method acces
+    void addRoomNotAvailable(IRoom room){
+        roomNotAvailable.add(room);
     }
 
-    public void addRoomNotAvailable(IRoom room){
-        roomNotAvailable.add(room);
+    public void addRoom(IRoom room){
+        roomSet.add(room);
     }
     
     public IRoom getARomm(String roomId){
@@ -42,6 +43,7 @@ public class ReservationService {
 
     public Reservation reserveARoom(Customer customer, IRoom room, Date checkInDate, Date checkOutDate){
         room.setIsFree(false);
+        addRoomNotAvailable(room);
         Reservation reservation = new Reservation(customer, room, checkInDate, checkOutDate);
         reservationList.add(reservation);
         return reservation;
